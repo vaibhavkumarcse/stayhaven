@@ -133,17 +133,19 @@ export default function PropertyDetail() {
 
               <section>
                 <div className="bg-surface border border-surface-lighter p-10 rounded-[2.5rem] flex flex-col md:flex-row items-center gap-8">
-              <div className="w-24 h-24 bg-brand rounded-[2rem] flex items-center justify-center text-white text-3xl font-black shadow-2xl shadow-brand/20">
-                {property.host?.avatar 
-                  ? <img src={property.host.avatar} className="w-full h-full object-cover rounded-[2rem]" alt="" />
-                  : property.host?.name?.charAt(0)}
-              </div>
-              <div className="text-center md:text-left flex-1">
-                <p className="text-[10px] font-black text-brand uppercase tracking-widest mb-1">Your Host</p>
-                <h4 className="text-2xl font-black text-white uppercase mb-2">{property.host?.name}</h4>
-                <p className="text-sm text-gray-500 font-medium">Member since {new Date(property.host?.createdAt).getFullYear()}</p>
-              </div>
-              <button className="btn-outline px-10 py-4 text-xs">CONTACT HOST</button>
+                  <div className="w-24 h-24 bg-brand rounded-[2rem] flex items-center justify-center text-white text-3xl font-black shadow-2xl shadow-brand/20">
+                    {property.host?.avatar 
+                      ? <img src={property.host.avatar} className="w-full h-full object-cover rounded-[2rem]" alt="" />
+                      : property.host?.name?.charAt(0)}
+                  </div>
+                  <div className="text-center md:text-left flex-1">
+                    <p className="text-[10px] font-black text-brand uppercase tracking-widest mb-1">Your Host</p>
+                    <h4 className="text-2xl font-black text-white uppercase mb-2">{property.host?.name}</h4>
+                    <p className="text-sm text-gray-500 font-medium">Member since {new Date(property.host?.createdAt).getFullYear()}</p>
+                  </div>
+                  <button className="btn-outline px-10 py-4 text-xs">CONTACT HOST</button>
+                </div>
+              </section>
             </div>
           </div>
 
