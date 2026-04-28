@@ -3,8 +3,8 @@ const router = express.Router();
 const { createPaymentIntent, confirmPayment, stripeWebhook } = require('../controllers/paymentController');
 const { protect } = require('../middleware/authMiddleware');
 
-// Webhook needs raw body — must be before express.json()
-router.post('/webhook', express.raw({ type: 'application/json' }), stripeWebhook);
+// Webhook is handled in server.js to ensure raw body access
+// router.post('/webhook', express.raw({ type: 'application/json' }), stripeWebhook);
 
 router.post('/create-intent', protect, createPaymentIntent);
 router.post('/confirm',       protect, confirmPayment);

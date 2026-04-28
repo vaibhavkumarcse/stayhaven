@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { Shield, TrendingUp, Users, CheckCircle, ArrowRight } from 'lucide-react';
 import useAuthStore from '../store/authStore';
-import axios from 'axios';
+import api from '../services/api';
 import toast from 'react-hot-toast';
 
 export default function BecomeHost() {
@@ -20,17 +20,14 @@ export default function BecomeHost() {
     }
 
     try {
-      const res = await axios.patch(`${import.meta.env.VITE_API_URL}/api/users/${user._id}/role`, 
-        { role: 'host' },
-        { headers: { Authorization: `Bearer ${localStorage.getItem('stayhaven-auth') ? JSON.parse(localStorage.getItem('stayhaven-auth')).state.token : ''}` } }
-      );
+      const res = await api.patch(`/users/${user._id}/role`, { role: 'host' });
       if (res.data.success) {
         updateUser(res.data.user);
         toast.success('Congratulations! You are now a host.');
         navigate('/dashboard/new');
       }
     } catch (err) {
-      toast.error('Failed to upgrade account');
+      toast.error(err.response?.data?.message || 'Failed to upgrade account');
     }
   };
 
