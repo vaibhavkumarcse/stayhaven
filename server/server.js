@@ -67,10 +67,12 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: 'StayHaven API is running' });
 });
 
-// Root route for deployments
-app.get('/', (req, res) => {
-  res.send('StayHaven API is successfully deployed and running!');
-});
+// In production, the root route is handled by the static files below.
+if (process.env.NODE_ENV !== 'production') {
+  app.get('/', (req, res) => {
+    res.send('StayHaven API is successfully running in development mode!');
+  });
+}
 
 // API Routes
 app.use('/api/auth', authRoutes);
