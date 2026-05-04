@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: stayhaven-fullstack
+    env: node
+    plan: free
+    buildCommand: npm run render-build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      # Note: Make sure to add MONGO_URI, JWT_SECRET, STRIPE_SECRET_KEY, etc. in your Render dashboard!
