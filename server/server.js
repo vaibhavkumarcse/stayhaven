@@ -5,6 +5,7 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
 const dotenv = require('dotenv');
+const path = require('path');
 
 dotenv.config();
 
@@ -27,7 +28,7 @@ connectDB();
 // Security middleware
 app.use(helmet());
 app.use(cors({
-  origin: process.env.CLIENT_URL ? process.env.CLIENT_URL.replace(/\/$/, '') : 'http://localhost:5173',
+  origin: true,
   credentials: true,
 }));
 
@@ -80,7 +81,17 @@ app.use('/api/users', userRoutes);
 app.use('/api/payments', paymentRoutes);
 
 // Error handling
-app.use(notFound);
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../client/dist')));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../client', 'dist', 'index.html'));
+  });
+} else {
+  // Catch 404s for API in dev
+  app.use(notFound);
+}
+
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
