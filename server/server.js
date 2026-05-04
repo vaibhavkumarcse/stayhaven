@@ -66,6 +66,11 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: 'StayHaven API is running' });
 });
 
+// Root route for deployments
+app.get('/', (req, res) => {
+  res.send('StayHaven API is successfully deployed and running!');
+});
+
 // API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/properties', propertyRoutes);
