@@ -96,9 +96,15 @@ if (process.env.NODE_ENV === 'production') {
 
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`\n🏠 StayHaven server running on port ${PORT}`);
-  console.log(`   Mode: ${process.env.NODE_ENV}`);
-  console.log(`   URL:  http://localhost:${PORT}\n`);
-});
+// For local development
+if (process.env.NODE_ENV !== 'production') {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => {
+    console.log(`\n🏠 StayHaven server running on port ${PORT}`);
+    console.log(`   Mode: ${process.env.NODE_ENV}`);
+    console.log(`   URL:  http://localhost:${PORT}\n`);
+  });
+}
+
+// Export for Vercel
+module.exports = app;
