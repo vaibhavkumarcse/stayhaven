@@ -12,5 +12,20 @@ export default defineConfig({
       },
     },
   },
+  build: {
+    chunkSizeWarningLimit: 1000,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('react')) return 'vendor-react';
+            if (id.includes('lucide')) return 'vendor-icons';
+            if (id.includes('stripe')) return 'vendor-stripe';
+            return 'vendor';
+          }
+        },
+      },
+    },
+  },
 });
 
